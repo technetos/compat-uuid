@@ -51,3 +51,10 @@ impl From<rocketUuid> for Uuid {
         Uuid(uuid.into_inner())
     }
 }
+
+impl From<&Uuid> for Uuid {
+    fn from(uuid: &Uuid) -> Self {
+        Uuid(uuid.0.clone())
+    }
+}
+
