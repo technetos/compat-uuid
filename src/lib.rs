@@ -12,7 +12,7 @@ use diesel::{
 };
 use rocket_contrib::uuid::Uuid as rocketUuid;
 use serde_derive::{Deserialize, Serialize};
-use std::io::Write;
+use std::{io::Write, str::FromStr};
 use uuid;
 
 #[derive(Clone, Debug, AsExpression, PartialEq, FromSqlRow, Serialize, Deserialize, Hash, Eq)]
@@ -58,3 +58,8 @@ impl From<&Uuid> for Uuid {
     }
 }
 
+impl From<&str> for Uuid {
+    fn from(uuid: &str) -> Self {
+        Uuid(uuid::Uuid::from_str(uuid).expect("bad uuid"))
+    }
+}
